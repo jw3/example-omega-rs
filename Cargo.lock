@@ -466,9 +466,14 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "gtk",
+ "omega-sys",
  "relm",
  "relm-derive",
 ]
+
+[[package]]
+name = "omega-sys"
+version = "0.1.0"
 
 [[package]]
 name = "once_cell"
