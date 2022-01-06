@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = "3.0"
+clap = { version = "3.0", features = ["derive"] }
 gtk = { version = "0.14", features = ["v3_22_29"] }
+gdk = "0.14"
 relm = "0.22"
 relm-derive = "0.22"
 omega = { path = "omega-sys" }

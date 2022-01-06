@@ -1,2 +1,2 @@
-Rusty Omega Editor
+Rusty Omega Edit Examples
 ===

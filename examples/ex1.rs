@@ -46,7 +46,6 @@ impl Update for App {
                 let buf = self.gui.input_widget.buffer().unwrap();
                 let txt = buf.text(&buf.start_iter(), &buf.end_iter(), false);
                 let txt = txt.unwrap();
-                println!("{}", txt.as_str());
                 self.state.s.delete(0, 1000);
                 self.state.s.insert(txt.as_str(), 0);
             }
@@ -84,7 +83,7 @@ impl Widget for App {
     }
 
     fn view(relm: &Relm<Self>, state: Self::Model) -> Self {
-        let glade_src = include_str!("../glade/ed.glade");
+        let glade_src = include_str!("../glade/ex1.glade");
         let builder = Builder::from_string(glade_src);
 
         let main_window: Window = builder.object("main_window").unwrap();

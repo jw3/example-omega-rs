@@ -756,6 +756,18 @@ extern "C" {
         viewport_ptr: *const omega_viewport_t,
     ) -> *mut ::std::os::raw::c_void;
 }
+extern "C" {
+    #[doc = " Change viewport settings"]
+    #[doc = " @param viewport_ptr viewport to change settings on"]
+    #[doc = " @param offset offset for the viewport"]
+    #[doc = " @param capacity capacity of the viewport"]
+    #[doc = " @return 0 on success, non-zero otherwise"]
+    pub fn omega_viewport_update(
+        viewport_ptr: *mut omega_viewport_t,
+        offset: i64,
+        capacity: i64,
+    ) -> ::std::os::raw::c_int;
+}
 #[doc = " Union to hold consecutive bytes of data.  If the length of the data is less than 8, the data will be stored directly"]
 #[doc = " in the sm_bytes field.  If the length is greater than 7, the data will be stored in allocated space on the heap"]
 #[doc = " whose address will be stored in the bytes field."]

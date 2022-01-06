@@ -36,14 +36,14 @@ impl Session {
         Self { p, views: vec![] }
     }
 
-    pub fn view(&mut self, offset: i64, size: i64) -> Rc<Viewport> {
+    pub fn view(&mut self, offset: i64, size: i64) -> ViewportPtr {
         let p = unsafe { omega_edit_create_viewport(self.p, offset, size, None, ptr::null_mut()) };
         let rc = Rc::new(Viewport { p, f: None });
         self.views.push(rc.clone());
         rc
     }
 
-    pub fn view_cb(&mut self, offset: i64, size: i64, cb: ViewportCallback) -> Rc<Viewport> {
+    pub fn view_cb(&mut self, offset: i64, size: i64, cb: ViewportCallback) -> ViewportPtr {
         let p = unsafe {
             omega_edit_create_viewport(self.p, offset, size, Some(vpt_change_cbk), ptr::null_mut())
         };
@@ -85,12 +85,20 @@ impl Session {
     }
 }
 
+pub type ViewportPtr = Rc<Viewport>;
+
 pub struct Viewport {
     p: *mut omega_viewport_t,
     f: Option<ViewportCallback>,
 }
 
 impl Viewport {
+    pub fn update(&self, offset: i64, size: i64) {
+        unsafe {
+            omega_viewport_update(self.p, offset, size);
+        }
+    }
+
     pub fn len(&self) -> i64 {
         unsafe { omega_viewport_get_length(self.p) }
     }
