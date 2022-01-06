@@ -1,6 +1,6 @@
 use gtk::prelude::{BuilderExtManual, TextBufferExt, TextViewExt, WidgetExt};
 use gtk::{Builder, Inhibit, TextBufferBuilder, TextView, Window};
-use omega_sys::Session;
+use omega::Session;
 use relm::{connect, Relm, Update, Widget};
 use relm_derive::Msg;
 
@@ -84,7 +84,7 @@ impl Widget for App {
     }
 
     fn view(relm: &Relm<Self>, state: Self::Model) -> Self {
-        let glade_src = include_str!("resources/ed.glade");
+        let glade_src = include_str!("../glade/ed.glade");
         let builder = Builder::from_string(glade_src);
 
         let main_window: Window = builder.object("main_window").unwrap();
@@ -104,7 +104,7 @@ impl Widget for App {
         connect!(
             relm,
             input_widget,
-            connect_key_press_event(_, e),
+            connect_key_press_event(_, _),
             return (Some(Msg::InputEvent), Inhibit(false))
         );
 
