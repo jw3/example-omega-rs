@@ -30,6 +30,12 @@ impl Session {
         Self { p, views: vec![] }
     }
 
+    pub fn from_file(file_path: &str) -> Self {
+        let file_path = CString::new(file_path).unwrap();
+        let p = unsafe { omega_edit_create_session(file_path.as_ptr(), None, ptr::null_mut()) };
+        Self { p, views: vec![] }
+    }
+
     pub fn view(&mut self, offset: i64, size: i64) -> Rc<Viewport> {
         let p = unsafe { omega_edit_create_viewport(self.p, offset, size, None, ptr::null_mut()) };
         let rc = Rc::new(Viewport { p, f: None });
